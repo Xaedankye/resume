@@ -97,13 +97,6 @@ export default function ProjectsPage() {
                     {config.label}
                   </h2>
                 </div>
-                <button
-                  onClick={() => setShowAddModal(true)}
-                  className="p-1.5 rounded-lg bg-[var(--accent)] text-[var(--background)] hover:opacity-90 transition-opacity"
-                  aria-label="Add new project"
-                >
-                  <Plus size={18} />
-                </button>
               </div>
               <p className="text-sm text-[var(--text-muted)]">
                 {config.description}
