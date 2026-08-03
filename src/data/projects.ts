@@ -2,6 +2,53 @@ import type { Project } from '@/types';
 
 export const projects: Project[] = [
   {
+    id: 'ai-support-agent',
+    title: 'AI Customer Support Agent',
+    description: 'An AI support agent for one of my clients that processes all inbound tickets, resolves documentation-solvable incidents automatically, and escalates the rest — cutting their overall ticket count by 30%.',
+    shortDescription: 'AI support agent that cut a client\'s ticket volume by 30%',
+    techStack: ['Python', 'LLM', 'RAG', 'Azure'],
+    tagIds: ['ai', 'automation', 'python'],
+    metrics: [
+      { label: 'Ticket Volume Reduction', value: '30%' },
+      { label: 'Resolution Method', value: 'Documentation-Based' },
+      { label: 'Escalation', value: 'Confidence-Gated' },
+    ],
+    featured: true,
+    persona: 'engineering',
+
+    // Deep dive content
+    overview: `Built for one of my clients, this agent sits in front of their support operation and handles the full ingress of customer tickets. It reads each inbound request, searches the company's pre-existing documentation for an answer, and responds to the customer directly — closing out incidents the documentation can solve. Anything it can't resolve with high confidence gets escalated to the human support group instead of guessing.`,
+
+    problem: `The client's support team was drowning in tickets that were already answered in their own documentation. Customers opened tickets for known issues, and agents spent their time copy-pasting documented solutions instead of working real escalations. Worse, the obvious fix — a generic AI responder — was dangerous: an angry customer or someone following up on a previous ticket getting a canned, context-free reply would only escalate the situation and burn more goodwill.`,
+
+    solution: `Built an agent that plugs directly into the client's proprietary systems and processes all inbound ticket traffic. Each ticket is classified before any response is drafted: sentiment analysis detects frustration, and a follow-up classifier recognizes when a ticket continues a prior conversation. The agent then searches the company's existing documentation, drafts an answer only when it can ground the response in a documented solution with high confidence, and closes the incident. Low-confidence or sensitive cases are routed to the human support group untouched.`,
+
+    architecture: {
+      description: 'A confidence-gated pipeline that classifies first, resolves from documentation second, and escalates anything it can\'t ground in a known answer.',
+      components: [
+        { name: 'Ingress Processor', description: 'Connects to proprietary ticketing systems and ingests all inbound customer requests', type: 'service', technologies: ['Python', 'Proprietary APIs'] },
+        { name: 'Classification Layer', description: 'Sentiment analysis for frustration and follow-up detection against prior tickets before any response is drafted', type: 'service', technologies: ['LLM', 'Classification Models'] },
+        { name: 'Documentation Index', description: 'Searchable index over the company\'s pre-existing documentation for grounding answers', type: 'database', technologies: ['RAG', 'Vector Search'] },
+        { name: 'Resolution Engine', description: 'Drafts responses grounded in documented solutions and closes incidents only at high confidence', type: 'service', technologies: ['LLM', 'Python'] },
+        { name: 'Escalation Router', description: 'Routes low-confidence, sensitive, or angry cases to the human support group', type: 'service', technologies: ['Proprietary APIs'] },
+      ],
+      flowDescription: `Inbound Ticket → Ingress → Classification (sentiment + follow-up) → Documentation Retrieval → Confidence Check → High Confidence: Auto-respond & Close | Low Confidence: Escalate to Support Group.`,
+    },
+
+    lessonsLearned: [
+      'Confidence gating is what makes autonomous resolution safe — only resolve what the documentation clearly answers',
+      'Classifying sentiment and follow-up intent before responding prevents generic AI replies from worsening customer relationships',
+      'Grounding every response in the company\'s own documentation keeps answers accurate and on-brand',
+      'Building to proprietary data contracts is often the hardest integration work in an AI system',
+    ],
+
+    teamContribution: `As the engineer on this engagement, I:
+- Designed the full ingress-to-resolution pipeline and its confidence-gating logic
+- Built the classification layer for sentiment and follow-up detection
+- Integrated with the client's proprietary systems for ticket ingress and escalation
+- Shipped the agent end-to-end, delivering a 30% reduction in overall ticket count`,
+  },
+  {
     id: 'event-driven-oms',
     title: 'Event Driven Order Management System',
     description: 'Enterprise-scale order management system with real-time order submission, 3PL integration, tracking, and multi-tenant customer facing portal.',
@@ -146,7 +193,7 @@ Because we had a small team, we had to migrate pieces of this at a time and back
       'Organizational connectivity is as important as system connectivity; leading E&T architecture requires constant cross-departmental alignment',
     ],
     
-    teamContribution: `As Manager II, I:
+    teamContribution: `As A Leader II, I:
 - Directed two managers and ~40 developers in an Agile transformation that increased velocity by 25% 
 - Championed the technical roadmap for "white glove" in-home delivery features for DCS customers
 - Led the E&T organization in defining standards for architecture and system connectability 
@@ -191,7 +238,7 @@ Because we had a small team, we had to migrate pieces of this at a time and back
       'A phased, event-driven approach to decommissioning mainframes minimizes risk compared to a "big bang" migration',
     ],
     
-    teamContribution: `As Manager, I:
+    teamContribution: `As A Leader, I:
 - Directed the transition of multiple Agile teams from legacy frameworks to modern, scalable frameworks
 - Instituted best practices for sprint planning, retrospectives, and backlog grooming across the department
 - Coordinated "top of the funnel" engineering efforts to ensure cross-product alignment for major releases

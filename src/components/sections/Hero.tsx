@@ -3,10 +3,10 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { usePersona } from '@/context/PersonaContext';
-import { ArrowDown, Sparkles } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 
 export function Hero() {
-  const { persona } = usePersona();
+  const { persona, togglePersona } = usePersona();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -37,7 +37,7 @@ export function Hero() {
     : 'Leading cross-functional engineering teams in Agile environments to deliver high-quality technology solutions';
 
   return (
-    <section className="relative flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center px-4 pt-16">
+    <section className="relative flex min-h-[calc(100vh-10rem-150px)] flex-col items-center justify-center px-4 pt-16 pb-4">
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Gradient orbs */}
@@ -89,12 +89,15 @@ export function Hero() {
       >
         {/* Text Content */}
         <div className="flex-1 text-center">
-        {/* Persona Badge */}
+        {/* Persona Badge - Clickable Toggle */}
         <motion.div variants={itemVariants} className="mb-6">
-          <span className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--card)] px-4 py-1.5 text-sm text-[var(--text-muted)]">
+          <button 
+            onClick={togglePersona}
+            className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--card)] px-4 py-1.5 text-sm text-[var(--text-muted)] hover:border-[var(--accent)] cursor-pointer transition-colors"
+          >
             <Sparkles size={14} className="text-[var(--accent)]" />
             {persona === 'developer' ? 'Engineering' : 'Leadership'} Focus
-          </span>
+          </button>
         </motion.div>
 
         {/* Main Title */}
@@ -152,41 +155,24 @@ export function Hero() {
             whileTap={{ scale: 0.98 }}
           >
             Get In Touch
-          </motion.a>
+</motion.a>
         </motion.div>
         </div>
 
-        {/* Photo (Leadership only) */}
-        {persona === 'leadership' && (
-          <motion.div
-            variants={itemVariants}
-            className="flex-shrink-0"
-          >
-            <div className="relative w-32 h-32 md:w-40 md:h-40 overflow-hidden rounded-full border-4 border-[var(--border)]">
-              <Image
-                src="/logan-photo.png"
-                alt="Logan Stewart"
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
-          </motion.div>
-        )}
-      </motion.div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 0.6 }}
-      >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+        {/* Photo - shows for both personas */}
+<motion.div
+          variants={itemVariants}
+          className="flex-shrink-0"
         >
-          <ArrowDown size={24} className="text-[var(--text-muted)]" />
+          <div className="relative w-32 h-32 md:w-40 md:h-40 overflow-hidden rounded-full border-4 border-[var(--border)]">
+            <Image
+              src={persona === 'leadership' ? '/logan-photo.png' : '/developer-photo.png'}
+              alt="Logan Stewart"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
         </motion.div>
       </motion.div>
     </section>

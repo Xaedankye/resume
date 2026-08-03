@@ -41,6 +41,7 @@ export const tags: Tag[] = [
   { id: 'coaching', name: 'Coaching', category: 'practice' },
   { id: 'architecture', name: 'System Architecture', category: 'practice' },
   { id: 'ai', name: 'Artificial Intelligence', category: 'practice' },
+  { id: 'automation', name: 'Automation', category: 'practice' },
 
   // Domain
   { id: 'oms', name: 'Order Management', category: 'domain' },

@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePersona } from '@/context/PersonaContext';
 import { workHistory } from '@/data/workHistory';
+import { projects, getProjectById } from '@/data/projects';
 import { tags, getTagsByIds } from '@/data/tags';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
@@ -47,18 +48,6 @@ const categoryColors: Record<string, string> = {
   tool: 'bg-gray-500/20 text-gray-400 border-gray-500/30',
 };
 
-// Project ID to name mapping
-const projectNames: Record<string, string> = {
-  'event-driven-oms': 'Shipper 360 Order Management System',
-  'tracking-system': 'Real-time Tracking Management System',
-  'offer-management': 'Offer Management System',
-  'tms-migration': 'Legacy TMS Migration',
-  'driver-app': 'Driver Mobile Application',
-  'customer-portal': 'Customer Self-Service Portal',
-  'load-management': 'Load Management System',
-  'dispatch-optimization': 'Dispatch Optimization Engine',
-};
-
 export default function WorkHistoryPage() {
   const { persona } = usePersona();
   const [selectedRoleId, setSelectedRoleId] = useState<string>(workHistory[0]?.id || '');
@@ -72,13 +61,16 @@ export default function WorkHistoryPage() {
 
   const selectedExperience = workHistory.find(e => e.id === selectedRoleId) || sortedHistory[0];
   const selectedTags = getTagsByIds(selectedExperience.tagIds);
-  const selectedProjects = (selectedExperience.projectIds || []).map(id => ({ 
-    id, 
-    name: projectNames[id] || id 
-  }));
+  const selectedProjects = (selectedExperience.projectIds || [])
+    .map(id => getProjectById(id))
+    .filter((project): project is NonNullable<typeof project> => project !== undefined)
+    .map(project => ({ 
+      id: project.id, 
+      name: project.title 
+    }));
 
   return (
-    <div className="flex min-h-screen flex-col pt-16">
+    <div className="flex min-h-[calc(100vh-150px)] flex-col pt-16">
       <Header />
       <main className="flex-1 py-8 md:py-12">
         <div className="mx-auto max-w-6xl px-4">

@@ -84,7 +84,7 @@ export default function ProjectsPage() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col pt-16">
+    <div className="flex min-h-[calc(100vh-150px)] flex-col pt-16">
       <Header />
       <div className="flex flex-1">
         <aside className="w-full md:w-80 border-r border-[var(--border)] bg-[var(--card)] md:fixed md:h-[calc(100vh-4rem)] overflow-y-auto pt-16 md:pt-0">
@@ -96,6 +96,15 @@ export default function ProjectsPage() {
                   <h2 className="text-lg font-semibold text-[var(--foreground)]">
                     {config.label}
                   </h2>
+                  {process.env.NEXT_PUBLIC_SHOW_ADD_BUTTON === 'true' ? (
+                    <button
+                      onClick={() => setShowAddModal(true)}
+                      className="p-1.5 rounded-lg bg-[var(--accent)] text-[var(--background)] hover:opacity-90 transition-opacity"
+                      aria-label="Add new project"
+                    >
+                      <Plus size={18} />
+                    </button>
+                  ) : null}
                 </div>
               </div>
               <p className="text-sm text-[var(--text-muted)]">

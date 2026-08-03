@@ -24,10 +24,10 @@ export function Header() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
           <motion.span
-            className="text-xl font-bold text-[var(--foreground)]"
+            className="text-lg font-bold text-[var(--foreground)]"
             whileHover={{ scale: 1.05 }}
           >
-            LS
+            Logan Stewart
           </motion.span>
         </Link>
 

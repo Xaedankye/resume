@@ -3,27 +3,27 @@ import type { SocialLink } from '@/types';
 export const socials: SocialLink[] = [
   {
     name: 'LinkedIn',
-    url: 'https://linkedin.com/in/xaedan',
+    url: 'https://www.linkedin.com/in/logan-stewart-767a4a170',
     icon: 'linkedin',
   },
   {
     name: 'GitHub',
-    url: 'https://github.com/xaedan',
+    url: 'https://github.com/Xaedankye',
     icon: 'github',
   },
   {
     name: 'Facebook',
-    url: 'https://facebook.com/xaedan',
+    url: 'https://www.facebook.com/stewl3/',
     icon: 'facebook',
   },
   {
     name: 'Email',
-    url: 'mailto:xaedan@email.com',
+    url: 'mailto:xaedankye@gmail.com',
     icon: 'email',
   },
   {
     name: 'Phone',
-    url: 'tel:+1234567890',
+    url: 'tel:+14796850589',
     icon: 'phone',
   },
 ];
